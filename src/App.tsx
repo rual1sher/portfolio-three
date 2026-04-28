@@ -234,7 +234,6 @@ export default function Portfolio() {
   const [lang, setLang] = useState("ru");
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [stackFilter, setStackFilter] = useState("all");
