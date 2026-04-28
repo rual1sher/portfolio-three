@@ -496,13 +496,9 @@ export default function Portfolio() {
             ) : (
               <div className="projects-grid">
                 {projects.map((p, i) => (
-                  <ProjectCard
-                    key={p.id || i}
-                    p={p}
-                    i={i}
-                    lang={lang}
-                    visitLabel={t.visitSite}
-                  />
+                  <FadeIn key={p.id || i} delay={i * 120}>
+                    <ProjectCard p={p} i={i} visitLabel={t.visitSite} />
+                  </FadeIn>
                 ))}
               </div>
             )}
@@ -762,21 +758,18 @@ function ProjectCard({
   p,
   i,
   visitLabel,
-  lang,
 }: {
   p: Project;
   i: number;
   visitLabel: string;
-  lang: string;
 }) {
   const [imgErr, setImgErr] = useState(false);
 
-  // Ищем перевод заголовка. Если в API есть title_ru или title_uz, берем их.
-  const title = String(p[`title_${lang}`] || p.title || "Project");
+  const title = p.title || "...";
 
   return (
     <a
-      href={String(p.url ?? "#")}
+      href={p.url}
       className="project-card"
       target="_blank"
       rel="noopener noreferrer"
@@ -799,9 +792,11 @@ function ProjectCard({
         </div>
       </div>
       <div className="project-info">
-        <span className="project-num">0{i + 1}</span>
-        <span className="project-title">{title}</span>
-        <span className="project-arrow">↗</span>
+        <div className="project-meta">
+          <span className="project-num">0{i + 1}</span>
+          <span className="project-tag">Case Study</span>
+        </div>
+        <h3 className="project-title">{title}</h3>
       </div>
     </a>
   );
